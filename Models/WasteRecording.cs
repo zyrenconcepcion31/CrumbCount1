@@ -1,4 +1,3 @@
-
 using System;
 using System.ComponentModel.DataAnnotations;
 
@@ -31,4 +30,4 @@ public class WasteRecording
     public string? Remarks { get; set; }
 
     public Product? Product { get; set; }
-}
+}          
