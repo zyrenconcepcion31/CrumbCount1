@@ -1,59 +1,77 @@
+
 @model IEnumerable<CrumbCount2.Models.WasteRecording>
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Title"] = "Waste Records";
 }
 
-<h1>Index</h1>
+<h1>Waste Records</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary">
+        Create New
+    </a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.QuantityWasted)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateRecorded)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ReasonForWaste)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Remarks)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Product)
-            </th>
-            <th></th>
+            <th>Product</th>
+            <th>Quantity Wasted</th>
+            <th>Date Recorded</th>
+            <th>Reason for Waste</th>
+            <th>Remarks</th>
+            <th>Unit Cost at Waste</th>
+            <th>Total Waste Cost</th>
+            <th>Actions</th>
         </tr>
     </thead>
+
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.QuantityWasted)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateRecorded)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ReasonForWaste)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Remarks)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Product.ProductName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.WasteRecordingId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.WasteRecordingId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.WasteRecordingId">Delete</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @(item.Product?.ProductName ?? "Unknown")
+                </td>
+
+                <td>
+                    @item.QuantityWasted
+                </td>
+
+                <td>
+                    @item.DateRecorded.ToString("MM/dd/yyyy")
+                </td>
+
+                <td>
+                    @item.ReasonForWaste
+                </td>
+
+                <td>
+                    @item.Remarks
+                </td>
+
+                <td>
+                    @item.UnitCostAtWaste.ToString("C2",
+                        new System.Globalization.CultureInfo("en-PH"))
+                </td>
+
+                <td>
+                    @item.TotalWasteCost.ToString("C2",
+                        new System.Globalization.CultureInfo("en-PH"))
+                </td>
+
+                <td>
+                    <a asp-action="Edit"
+                       asp-route-id="@item.WasteRecordingId">Edit</a> |
+
+                    <a asp-action="Details"
+                       asp-route-id="@item.WasteRecordingId">Details</a> |
+
+                    <a asp-action="Delete"
+                       asp-route-id="@item.WasteRecordingId">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

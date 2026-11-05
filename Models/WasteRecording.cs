@@ -28,6 +28,16 @@ public class WasteRecording
 
     [StringLength(250)]
     public string? Remarks { get; set; }
+    
+[Range(0, double.MaxValue)]
+[Display(Name = "Unit Cost at Waste")]
+public decimal UnitCostAtWaste { get; set; }
+
+
+[System.ComponentModel.DataAnnotations.Schema.NotMapped]
+[Display(Name = "Total Waste Cost")]
+public decimal TotalWasteCost => QuantityWasted * UnitCostAtWaste;
+
 
     public Product? Product { get; set; }
 }          

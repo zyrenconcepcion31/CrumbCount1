@@ -87,6 +87,9 @@ namespace CrumbCount2.Migrations
                         .HasMaxLength(250)
                         .HasColumnType("TEXT");
 
+                    b.Property<decimal>("UnitCostAtWaste")
+                        .HasColumnType("TEXT");
+
                     b.HasKey("WasteRecordingId");
 
                     b.HasIndex("ProductId");
